@@ -17,10 +17,10 @@ for e in $(pwd)/examples/*; do
   echo "v_wrk $v_wrk"
   docker run --rm -t \
              -v "$v_src" \
-			 -v "$v_wrk" \
-			 -w "//work" \
-			 ghdl/ghdl:stretch-mcode-gpl \
-			 bash -c "//src/test.sh"
+             -v "$v_wrk" \
+             -w "//work" \
+             ghdl/ghdl:stretch-mcode-gpl \
+             bash -c "//src/test.sh"
 done
 
 mkdir -pv release
