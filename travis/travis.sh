@@ -8,7 +8,7 @@ echo "$(dirname $0)/.."
 echo "$(cd `dirname $0`/..; pwd)"
 
 for e in $(pwd)/examples/*; do
-  echo "$e"
+  printf "\n$e\n"
   p="outputs/$(basename $e)/ghdl"
   mkdir -pv "$p"
   v_src="/$(cd `dirname $0`/..; pwd)/examples/$(basename $e)://src"
@@ -19,7 +19,7 @@ for e in $(pwd)/examples/*; do
              -v "$v_src" \
              -v "$v_wrk" \
              -w "//work" \
-             ghdl/ghdl:stretch-mcode-gpl \
+             ghdl/ghdl:stretch-mcode \
              bash -c "//src/test.sh"
 done
 
