@@ -1,5 +1,4 @@
 #!/bin/sh
-
 if [ "$(uname | cut -c1-5)" = "MINGW" ]; then
   XMING_PATH="/c/Program\ Files\ \(x86\)/Xming/Xming.exe"
   DOCKER_DISPLAY="`ipconfig | grep 'IPv4' | grep -o '[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*' | grep "^10\.0\.*"`:0"

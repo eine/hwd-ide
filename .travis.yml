@@ -14,9 +14,6 @@ addons:
     packages:
       - docker-ce
 
-script:
-   - ./travis/travis.sh
-
 deploy:
 #  overwrite: false
   provider: releases
@@ -30,3 +27,23 @@ deploy:
     branch: stable
 #    all_branches: true
     tags: true
+
+stages:
+  - build images
+  - test
+
+jobs:
+  include:
+    - script: ./travis/travis.sh
+    - stage: build images
+      script: ./filemanager/images.sh
+      deploy:
+        - provider: script
+          skip_cleanup: true
+          script: ./filemanager/deploy2dockerhub.sh
+          env:
+            - secure: EeNRYQfPvtBGv+6OgVryTVmmPN1fSYo8DZnv3ll/zfd12PaKtU5dsucSVhmaJ/PblkTa8Cc8rxnk/Yn3PwdQ6qRQxu4qGfCsyf2YQaP1w/eJuinezinLAB3ECKa9LC6DGIym5A6UrQNWpnBMOqrnVWU2I0xhwtlNDI5bdlozblab0e1r0tok5ow9qohKgw7IQpRKmvvxm0FWML+zF7kJ28EGq+MO20/9RsmtFImOs+kDbUig7dwQGKbGEdfrsq4sgWTkySW6HmGHJfA2BjRO0OI6qT1LKzjRtTQFinQXWR1uCY80ugLIEhNUozfOiLHTwecdl3SCwC3yTZvZPfenn5pgNSt/KUZAUE6VBJZcEBJk9PXfdo3iLzAg3rSLzCzj/Stwr1l+mgGK/iRVaJdArtQhbQleVTsV4+YWyplteidrJm92uqB33e/LsbRGYaGG9cJOVZBzqhiUldojJq2+t4VafjsAoLFwOqVgnHdygfMT+scexN+/7DianDnuB1lAdifPXUdksAp9zaomDuJgxnV01sDI5R27onk/yNRDSSshJ/DhsqnEX7iAqHBg5VrpufZgwwcwucAV4WpALEFJkZcPB4Ln8KoupDh9M0n+g7fMiZ0pJNFVz/PcEfOh+3kPKssQ32cFWKyjjS1ngmncgAiCjfL+jaTAW+9BxJEMRcY= #U
+            - secure: ONhOhuyl02bTSeMQ9W6lLRggzApCHFJAs4ES62ta7Ja7BAic/3MOYW3OPpqjsW1XakgaUJd06YrQrFaWTF57i6sGWC1qGwlJHfrDeCBhTRKDiKek/yN9JEqVWFxrZ0ymo7KvctuLIkD9mbXhFl9gMB2eLaiIxy6KuR+ZJ4/vkT1+Xgj2/HTzNaPikePboiR+j+9U0E7c1Dt+9PuHNgnuB8WWLZrgjwNcijBEdzgzQTPeuyww9SRfmgQ6TxL3hmJCup5hVG4/btyl4l08G5bB2IBk8jXB5r5UqEC9PTcadJumJGSVFU4WImnlmbRZJTWKFtTMAf1pp/6Ltj2I4EekpiHnW/6icasYpY+Tjjj75E8sbYHd7y//+AQ+PtKxvMBQoLpZ6sHKUbvjcGsBDMSFWg/tZUuh2JkqXvwHMXXUTlJfKT2j9CSz3cHltsFM/HmMecC+UYuk2J3dwv3ZwcoJcDfrMiUz2WNNMGEidSpg7mid3PqiuiYC08PhPm3gMPFwUBBKWH25ABpmlDde+fWpqeDVkfZZb+cYpdXuH3o8Rew9C9O/5TmKJufWqBu8h3jC1zKNvnLrD58cWgKHETYBGLuO3db+hL0fe8lKetbz9DQRyjNIlY0aHeX/eUtvuGVO4r//qiw5JiGLkdU6bB6p7722u4HqbO/lG5NdZw2R0tE= #P
+          on:
+            repo: 1138-4EB/elide
+            branch: develop

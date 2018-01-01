@@ -1,0 +1,20 @@
+port: 80
+baseURL: /
+noAuth: true
+address: 127.0.0.1
+reCaptchaKey: ''
+reCaptchaSecret: ''
+database: "/opt/filemanager.db"
+log: stdout
+plugin: ''
+scope: "/srv"
+allowCommands: true
+allowEdit: true
+allowNew: true
+commands:
+- ls
+- mv
+- cp
+- ghdl
+- vunit
+- python3
