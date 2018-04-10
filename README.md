@@ -24,7 +24,7 @@ For example, run `docker run -dp 2000:80 -v /$(pwd)://src ghdl/ext:ide`, then br
 
 ---
 
-In order to use the version with *GtkWave*, you will need an *X11* server running on the host. On Windows, you can use [Xming](https://sourceforge.net/projects/xming/) or [VcXsrv](https://sourceforge.net/projects/vcxsrv/).
+In order to use the version with *GtkWave*, you will need an *X11* server running on the host. On Windows, you can use [Xming](https://sourceforge.net/projects/xming/), [VcXsrv](https://sourceforge.net/projects/vcxsrv/) or [Cygwin/X](https://x.cygwin.com/).
 
 A script is provided to help define the required parameters to let GUI applications inside a docker container use the X server on the host. `docker_guiapp.sh` works with GNU/Linux and Windows (XMing):
 

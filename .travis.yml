@@ -4,42 +4,38 @@ dist: trusty
 sudo: required
 services: docker
 install: skip
-
 addons:
   apt:
     packages:
-      - docker-ce
-
+    - docker-ce
 deploy:
-#  overwrite: false
   provider: releases
   skip_cleanup: true
   api_key:
     secure: C6GGuFAptgzQLTfRVbheCPGh0S1ZHFA+GKKcqMPOik5t3CY9xqZUsHOm55sptI4FfKmSgzM/C9LMaL08zCeyn9H80Sjhv5zMTp2s1i3FFHCmmwMSPaZs7uwMuB2kIVFTaSQQGihZklKzbLJOGIrJJC5s4es1JHii8Tc0cjp9ck6tlb+kQ2rk1pXtVUo0E5hXFM0zMT6KX+YmtAYvC8yTSEuZLsISkSZlZa0Wa/0NX3vvn2xTP6Wyk9FIjtN4Pob3rRjee80wADVc0Pn2nlKa6zZnU1+/IqQN7bPN0pfpUBhMmaSLUYDbHhoDChEQnFxo0vKupbTSS30iOkZMU7HAnDKdxgQSg8jJ4fDLOPK8jIDRODXHcORqeXsI92CUX8ldCezvy24A8x0bUlluswBYGPxILzqPkpPTaDpvw7h56/RTyjX3ia3X3aIvCDnZhmFvR5HFjjPoY78e0MXtf7N3npSmf/PJD7G80IUtkCfYI+Ms06HFT6tTjMXAGSKLSNVFgnxZeoLAerOAYPJwPqkdawNxiIFWbVa+OS52TUGrSPXvJipKHjgbHpBx/cgFQz5FOUm1SGkIEaz9HkE+QrwOnb0hvWcXRB9ugq3nqmYYowwceuTAIWX8wsoAWy0U7VtZKFYetMoxwuyL377m+cwovLdXU/5hF147H2aX7n/jGuA=
   file_glob: true
-  file: "release/*.tgz"
+  file: release/*.tgz
   on:
     repo: 1138-4EB/hwd-ide
     branch: master
-#    all_branches: true
     tags: true
-
 stages:
-  - build images
-  - test
-
+- build images
+- test
 jobs:
   include:
-    - script: ./travis/travis.sh
+    - script: "./travis/travis.sh"
     - stage: build images
-      script: ./filebrowser/images.sh
+      script: "./filebrowser/images.sh"
       deploy:
-        - provider: script
-          skip_cleanup: true
-          script: ./filebrowser/deploy2dockerhub.sh
-          env:
-            - secure: EeNRYQfPvtBGv+6OgVryTVmmPN1fSYo8DZnv3ll/zfd12PaKtU5dsucSVhmaJ/PblkTa8Cc8rxnk/Yn3PwdQ6qRQxu4qGfCsyf2YQaP1w/eJuinezinLAB3ECKa9LC6DGIym5A6UrQNWpnBMOqrnVWU2I0xhwtlNDI5bdlozblab0e1r0tok5ow9qohKgw7IQpRKmvvxm0FWML+zF7kJ28EGq+MO20/9RsmtFImOs+kDbUig7dwQGKbGEdfrsq4sgWTkySW6HmGHJfA2BjRO0OI6qT1LKzjRtTQFinQXWR1uCY80ugLIEhNUozfOiLHTwecdl3SCwC3yTZvZPfenn5pgNSt/KUZAUE6VBJZcEBJk9PXfdo3iLzAg3rSLzCzj/Stwr1l+mgGK/iRVaJdArtQhbQleVTsV4+YWyplteidrJm92uqB33e/LsbRGYaGG9cJOVZBzqhiUldojJq2+t4VafjsAoLFwOqVgnHdygfMT+scexN+/7DianDnuB1lAdifPXUdksAp9zaomDuJgxnV01sDI5R27onk/yNRDSSshJ/DhsqnEX7iAqHBg5VrpufZgwwcwucAV4WpALEFJkZcPB4Ln8KoupDh9M0n+g7fMiZ0pJNFVz/PcEfOh+3kPKssQ32cFWKyjjS1ngmncgAiCjfL+jaTAW+9BxJEMRcY= #U
-            - secure: ONhOhuyl02bTSeMQ9W6lLRggzApCHFJAs4ES62ta7Ja7BAic/3MOYW3OPpqjsW1XakgaUJd06YrQrFaWTF57i6sGWC1qGwlJHfrDeCBhTRKDiKek/yN9JEqVWFxrZ0ymo7KvctuLIkD9mbXhFl9gMB2eLaiIxy6KuR+ZJ4/vkT1+Xgj2/HTzNaPikePboiR+j+9U0E7c1Dt+9PuHNgnuB8WWLZrgjwNcijBEdzgzQTPeuyww9SRfmgQ6TxL3hmJCup5hVG4/btyl4l08G5bB2IBk8jXB5r5UqEC9PTcadJumJGSVFU4WImnlmbRZJTWKFtTMAf1pp/6Ltj2I4EekpiHnW/6icasYpY+Tjjj75E8sbYHd7y//+AQ+PtKxvMBQoLpZ6sHKUbvjcGsBDMSFWg/tZUuh2JkqXvwHMXXUTlJfKT2j9CSz3cHltsFM/HmMecC+UYuk2J3dwv3ZwcoJcDfrMiUz2WNNMGEidSpg7mid3PqiuiYC08PhPm3gMPFwUBBKWH25ABpmlDde+fWpqeDVkfZZb+cYpdXuH3o8Rew9C9O/5TmKJufWqBu8h3jC1zKNvnLrD58cWgKHETYBGLuO3db+hL0fe8lKetbz9DQRyjNIlY0aHeX/eUtvuGVO4r//qiw5JiGLkdU6bB6p7722u4HqbO/lG5NdZw2R0tE= #P
-          on:
-            repo: 1138-4EB/hwd-ide
-            branch: develop
+      - provider: script
+        skip_cleanup: true
+        script: "./filebrowser/deploy2dockerhub.sh"
+        on:
+          repo: 1138-4EB/hwd-ide
+          branch: develop
+
+env:
+  global:
+    - secure: "wwbV8qTdQa94rbCZCrBt2r5ngaNEUgr2zsiyLCLREzsrGN0SbxKZCYbBWReVUbdK3vaylPl7x5rNvl/trkROyUhVlNnHdvtX8ALc6jtUHr0EdVygSVNZfq1eVIHKn0heVI1OsRR98KJl2HkTas/6jWjk8WgO4mZqvC2Pp99aFLc34xvwxPJX7sAtGLgprpt1ULKAJz7V3ONwqAvu94oJpE2R+XCcPjcIxWIEKCfy0Xm/F59Ne8DG+KqCrNRI5d/hV9nent0RjDWl/BuQ+5rMp4qyiPd30HGRN5XXq8oFW3k6DM6OSn9cgyUdQ6PQ6GbYplaLyMltBQZaqW9jcXPtwhpOkIuIlkPWDGgz8Yd3S/67drR/dPymz4CVSBBDfZRguF+8piVQT0ZSnOBQSwDfwHOgjMY2NCQrgeIBOaaW1CYmwwyMPVKQ3MBRjX46XkVJrgDUnlbLzJ/R/gG55FeQvZu1lrNwUxZer7RG1TtlLSLhQ8WPJcHIeF110YxqaIawfFWzF5T5iimHclWa4Ld8HV9/z/TuY1ufbj6vcCnzSjcFOhPmyeJ7nLiKQ4nFzE0VLt5zHpnaW0ac+gmXfQse46uNr/F9mLZY+taXOy9gNp8rMg0aADXyagPDrebcwn5TyMAD9Q2mTeoy+xHXb2MOHdNnNvhTGRdqYT98ESr8vk4=" #U
+    - secure: "rEiTEX24Zi9FwQwrj4irPZrevczN+oSSlWZQYEcIGalOXarCrUvDF8kPm/vdfvJMo39VBlIQjdBKRcefDi0cRg/x6XGz4ox21WCeSA1TJWKc+xllwNuYXVxiKmvxfhWlMtRpUdVZVYzH8LgTnVLBWSFc7r8fOeFw2FqBs63ayMrr4BUMe01a6pDtM7QW6JIi2oJ2qIwwTx/kMyQX2Cr5bW4R22+pNG2ThRgjwzUi2CFqOW0Nq4kruyPbGjVQilshsRQF81jFmlTfWX7eJLyC9CWnBGnwY7nbH/Jv1IVhny/B+cptXZ/XrzjmFbB3C548T6wLUivfbBcKwgVjel+yb9oj/+5fhdjngDKpi09gX//hd230iCMqwBlesdVVqhu2Ld+qmqX1fG0DejxqnUHR67+PMA1/yAIKTt6m4ykhrdCwme5Y2dYXMpDjhdwXz5VkIGy7NhGu5rp9k8uAU14D6m4MedntaexbawnQ+pLsR1E82Tvt+PdF5NPd7lm1XnhiWKkoHFRlgfZ4dSRJCjH2Qs5kEVqer48GXrdcf97WaWBvlydTPtL8vSDRriXknGCj3r4SbpV9ul3EYoytUWWEStisgNgeG8s+Q0w00I+CYk1kcgkF8AAB1UNT0YQDxTzRAUhG7JbZH4xJKdTIiTQuLHMzHFrtRi8M/XjW8iSmYdg=" #P
