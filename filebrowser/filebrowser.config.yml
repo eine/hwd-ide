@@ -4,7 +4,7 @@ noAuth: true
 address: 127.0.0.1
 reCaptchaKey: ''
 reCaptchaSecret: ''
-database: "/opt/filemanager.db"
+database: "/opt/filebrowser.db"
 log: stdout
 plugin: ''
 scope: "/srv"

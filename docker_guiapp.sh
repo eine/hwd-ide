@@ -55,7 +55,7 @@ if [ -z "$SKIP_DISP" ]; then
             exit 1
           else
             eval "$XMING_PATH -ac -multiwindow -clipboard" 1> /tmp/xming_log.log 2>&1 &
-                test_xdpyinfo
+            test_xdpyinfo
           fi
       ;;
       esac
