@@ -1,20 +1,19 @@
-port: 80
-baseURL: /
-noAuth: true
-address: 127.0.0.1
-reCaptchaKey: ''
-reCaptchaSecret: ''
-database: "/opt/filebrowser.db"
-log: stdout
-plugin: ''
-scope: "/srv"
+address: ""
 allowCommands: true
 allowEdit: true
 allowNew: true
 commands:
-- ls
-- mv
-- cp
-- ghdl
-- vunit
-- python3
+  - ls
+  - mv
+  - cp
+  - ghdl
+  - vunit
+  - python3
+database: /opt/filebrowser/filebrowser.db
+log: stdout
+noAuth: true
+plugin: ""
+port: 80
+reCaptchaKey: ""
+reCaptchaSecret: ""
+scope: /srv
