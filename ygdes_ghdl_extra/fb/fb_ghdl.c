@@ -48,8 +48,8 @@ void init_fb() {
    }
 
   fb_fd = open(fb_name, O_RDWR);
-  if (!fb_fd) {
-    perror("\nfopen : ouverture du framebuffer impossible\n");
+  if (fb_fd == -1) {
+    perror("fopen : ouverture du framebuffer impossible\n");
     init_done = -1; return; }
 
   if (ioctl(fb_fd, FBIOGET_FSCREENINFO, &finfo)) {
