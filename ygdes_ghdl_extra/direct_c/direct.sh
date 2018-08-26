@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 # direct.sh
+cd $(dirname $0)
 gcc -c ghdl_direct.c -o ghdl_direct_c.o &&
 ghdl -a ghdl_direct.vhdl direct_test.vhdl &&
 ghdl -e -Wl,ghdl_direct_c.o test_direct &&

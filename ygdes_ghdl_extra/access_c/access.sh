@@ -1,5 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 # access.sh
+cd $(dirname $0)
 gcc -c ghdl_access.c -o ghdl_access_c.o &&
 ghdl -a ghdl_access.vhdl access_test.vhdl &&
 ghdl -e -Wl,ghdl_access_c.o test_access &&

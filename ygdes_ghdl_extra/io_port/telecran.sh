@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # fichier : telecran.sh
 gcc -c rt_functions.c &&
 gcc -c boutons.c -o boutons_c.o &&

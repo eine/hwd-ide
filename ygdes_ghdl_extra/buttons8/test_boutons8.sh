@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 gcc -c boutons8.c -o boutons8_c.o &&
 ghdl -a boutons8.vhdl &&
 ghdl -e -Wl,boutons8_c.o test_boutons8 &&

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # runme.sh : compile and execute the example program
 gcc -O2 -c int_ops.c -o int_ops_c.o &&
 ghdl -a -Wc,-O2 int_ops.vhdl test_bool.vhdl &&
