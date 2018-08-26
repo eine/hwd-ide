@@ -1,0 +1,68 @@
+Le 2014-11-04 08:44, René a écrit :
+> Hi whygee,
+>> The trick there is that it's NOT the C side that controls the simulation,
+>> but the VHDL side that sets the thing up.
+>>
+> Yes this is what I need a control from C side.
+
+So you have to wrap your VHDL design around a VHDL code that can yield control
+using certain tricks.
+
+>> For example, the real-time clock actually stops/pauses the simulator
+>> when it has finished all its deltas.
+>> Doing otherwise is much more difficult.
+>>
+>> So your overall events system must work in a "polled" way,
+>> with your C function called everytime GHDL has done its work for the current cycle.
+>>
+> 
+> Polled way is not nice, but if it the only way.
+
+This is also my opinion.
+
+> Ok I can make a process for polling.
+> What ist the wait until time/event?
+> 
+> process
+>     wait until  C function
+>     ?
+> 
+> 
+
+Using "wait" does not work, because the function can return an integer, or an access, or a classic type,
+but not an event. Events (that can wake up a process) are internal structures.
+
+But events are triggered when a process changes a signal. That's how you can do it.
+It doesn't work when your C code changes the signal because the C  misses all the internal bookkeeping
+and other checks and stuffs...
+
+So you write a process, where you poll (in a "while") the condition from the C side, by calling a function.
+When the C function returns something in particular, then you assign the signal that acts like a  "semaphore"
+and wait for something else, so the signal can be propagated and other processes can be woken up.
+
+There are two cases : either your sim is a "free running" loop, or it is always waiting for new events from C.
+
+The free running loop is quite simple, you insert the polling in the main loop, which might be controlled
+by a clock signal in VHDL. So you have :
+  process (my_clock) is
+  begin
+    if my_C_function() = 42 then
+      my_semaphore = not my_semaphore;
+    end if;
+  end process;
+
+Don't forget to initialise my_semaphore : std_ulogic := '0' or else the NOT will return
+the same meta-value all the time...
+
+This process is woken up at every edge of clock (rising, falling) so the my_semaphore signal is
+synchronous to the simulation. Then all the processes that are sensitive to my_semaphore
+will wake up and do your bidding.
+
+The waiting loop can be more complex. If nothing is available from the C side, the C code
+can either delay() and/or execute more work.
+
+You can start from http://ygdes.com/GHDL/clk/ which synchronises a simple simulation
+to the host's computer clock, with a blocking delay().
+
+Hope this helps,
+YG
