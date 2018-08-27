@@ -53,3 +53,28 @@ This shows how a C module can access a shared variable in a VHDL package, using 
 ---
 
 More to come in the future...
+
+# External resources
+
+- VHDL References
+  - (LRM in HTML or PDF ?)
+  - http://www.vhdl.org/ (GHDL is not linked back from there, BTW)
+  - comp.lang.vhdl Frequently Asked Questions And Answers
+    - http://www.vhdl.org/comp.lang.vhdl/FAQ1.html  (Part 1): General
+    - http://www.vhdl.org/comp.lang.vhdl/FAQ4.html  (Part 4): VHDL Glossary
+- Tutorials
+  - in french: http://vhdl33.free.fr/wp-content/cours/cours2007.htm
+- Papers
+  - Pascal Giard, communication with POSIX shared memory and CORBA: http://organact.mine.nu/dokuwiki/_media/mesetudes:mnrc08.pdf?id=mesetudes&cache=cache
+  - A Methodology and Toolset to Enable SystemC and VHDL Co-simulation
+    - http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=4208939
+    - http://www.lsc.ic.unicamp.br/publications/maciel2007isvlsi.pdf
+- Articles
+  - In GNU/Linux Magazine France (in french) issues 126 (04/2010), HS47 (04-05/2010),
+127 (05/2010), 130 (09/2010), 131 (10/2010), 132 (11/2010) and more...
+- Source code
+  - VHDL Cosimulation with GHDL (VPI, VHPI): http://www.myhdl.org/doku.php/dev:vhdl_cosim
+  - Modifications to GHDL VPI Examples: http://www.myhdl.org/doku.php/dev:vhdl_cosim:ghdl_vpi1
+
+  > "This was a quick experiment to take the cver VPI implementation, compile it and load it in GHDL. The experiment was successful but was a very limited experiment. Although the VPI was loaded successfully nothing from the VPI interface was accessed. Need to do some more experiments to test feasibility of the VPI interface."
+
