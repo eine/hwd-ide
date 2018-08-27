@@ -27,9 +27,7 @@ For example, run `docker run -dp 2000:80 -v /$(pwd)://src ghdl/ext:ide`, then br
 
 In order to use the version with *GtkWave*, you will need an *X11* server running on the host.
 
-> NOTE: On Windows, [VcXsrv](https://sourceforge.net/projects/vcxsrv/) or [Cygwin/X](https://x.cygwin.com/) can be used.
-
-It is highly recommended to use [x11docker](https://github.com/mviereck/x11docker) in order to executed containers that require GUI features on either GNU/Linux or Windows. x11docker is a helper script to enable GUI apps inside the containers to use a X server on the host. It does also have a specific security setup to enhance container isolation from host system.
+It is highly recommended to use [x11docker](https://github.com/mviereck/x11docker) in order to execute containers that require GUI features on either GNU/Linux or Windows. x11docker is a helper script to enable GUI apps inside the containers to use a X server on the host. It does also have a specific security setup to enhance container isolation from host system. Besides providing several options for GNU/Linux hosts, `x11docker` supports multiple X servers on Windows: [VcXsrv](https://sourceforge.net/projects/vcxsrv/) or [Cygwin/X](https://x.cygwin.com/). See [MSYS2, Cygwin and WSL on MS Windows](https://github.com/mviereck/x11docker#msys2-cygwin-and-wsl-on-ms-windows).
 
 ``` bash
 x11docker -- -dp <HOST_PORT>:8080 [-v <ABS_PATH>://srv] -- ghdl/ext:ide
