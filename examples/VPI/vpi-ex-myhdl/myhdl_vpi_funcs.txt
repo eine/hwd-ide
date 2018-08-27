@@ -1,0 +1,20 @@
+
+/**
+ *  2 vpiHandle(s) from_myhdl* and to_myhdl
+ */
+
+vpi_printf
+vpi_control
+vpi_get_time
+vpi_handle
+vpi_iterate
+vpi_get
+vpi_get_str
+vpi_scan
+vpi_register_cb
+vpi_free_object
+vpi_put_value
+vpi_register_systf
+
+s_vpi_time
+s_vpi_value
