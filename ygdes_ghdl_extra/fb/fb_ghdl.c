@@ -68,7 +68,7 @@ void init_fb() {
 
   /* projection du framebuffer en memoire utilisateur */
   fbp = (char *)mmap(0, screensize,
-      PROT_READ|PROT_WRITE, MAP_SHARED, fb_fd, 0);
+      PROT_READ|PROT_WRITE, MAP_SHARED|MAP_32BIT, fb_fd, 0);
   if (*(int*)fbp == -1) {
     perror("echec de mmap() du framebuffer.\n");
     init_done = -4; return; }
