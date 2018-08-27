@@ -19,6 +19,7 @@ begin
         pixel(j,i) := 16#FFFF#;
       end loop;
     end loop;
+    save_pixels("test_fb2.raw24");
     wait;
   end process;
 end test;

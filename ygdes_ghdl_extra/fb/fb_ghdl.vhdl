@@ -42,7 +42,7 @@ package fb_ghdl is
           integer range 0 to fbxv1) of integer;
 
   -- Définit un pointeur vers ce type :
-  type screen_p is access screen_type; 
+  type screen_p is access screen_type;
 
   -- alias permettant de retourner ce type :
   function get_fbp(f : integer) return screen_p;
@@ -88,6 +88,7 @@ package body fb_ghdl is
     file pixout : screen_file open write_mode is n;
     variable i,j,k,l: integer;
   begin
+    report "save_pixels('" & n & "') : " & integer'image(fbx) & "x" & integer'image(fby) severity note;
     for j in 0 to fby1 loop
       l:=0;
       -- collecte les composantes

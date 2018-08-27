@@ -57,7 +57,7 @@ begin
     -- backup
     if (couleur=-3500000) then
       save_pixels("lissajous.raw24");
-      assert false severity failure;
+      report "saved to lissajous.raw24. Exiting..." severity failure;
     end if;
   end process;
 end courbes;
