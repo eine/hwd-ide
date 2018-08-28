@@ -1,0 +1,20 @@
+ghdlex license terms
+----------------------------------------------------------------------------
+
+Ok, we're not lawyers, and we sometimes roll eyes at their language, too.
+Just be so kind and follow those rules:
+
+- If you modify the code, add your copyright and feed back your changes
+  to the author(s).
+  We published this for learning purposes.
+- Don't remove copyrights. We will get angry, if you do.
+- You can use this code commercially, but under the above conditions.
+  You may NOT sell it.
+
+There are more packages and their respective licenses involved:
+
+- GHDL: See GPL license
+- netpp: See netpp license
+
+----------------------------------------------------------------------------
+Martin Strubel // <hackfin@section5.ch>

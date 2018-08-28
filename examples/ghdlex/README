@@ -1,0 +1,64 @@
+ghdlex demo distribution
+----------------------------------------------------------------------------
+
+This demonstrates usage of threading to remote control a VHDL simulation
+from a C program (or Python via netpp, optionally).
+More details about netpp:
+  http://www.section5.ch/netpp
+
+For all other details: Read the source, Luke.
+
+For usage information, see LICENSE.txt
+
+This is only tested under Linux. You need a working ghdl installation.
+
+List of example simulations:
+
+* simpipe: Simulates a simple I/O using a named pipe. This normally works
+  in linux only. First, create two named pipes using the following command:
+
+    mkfifo /tmp/sim_touser; mkfifo /tmp/sim_fromuser
+
+  Then start simpipe and open two more windows, in one you can for example
+
+    cat /tmp/sim_touser
+
+  In the other, you can write to the simulation by
+
+    cat > /tmp/sim_touser
+
+These are netpp featured and will not be compiled by default (unless you
+have netpp installed and pass the installation directory to 'make' using
+the NETPP variable.
+
+* simfifo: Simulates a FIFO master/slave. When compiled with NETPP option
+  set, start a netpp server only and wait for access to the 'Fifo' property.
+  For some gory details about fifo status flags, see fifo.c
+
+* simnetpp: A client example. Connects to the netpp example device (see
+  devices/example/slave) and modifies the "ControlReg" property remotely.
+
+* simfb: Connects to the remote 'display' server and shows a 256x256
+  YUV color test image.
+
+To compile the example, run 'make'. You will end up with a simulation
+executable 'simpipe' which you can run without or with arguments, for
+example:
+
+  ./simpipe --stop-time=500ms --wave=test.ghw
+
+Then you can for example try to the find the FIFO event with gtkwave:
+
+  gtkwave test.ghw
+
+To build the netpp featured variants, run
+
+	make allnetpp
+
+and wait for things to finish. You may have to run a "make clean" before that.
+
+
+Have fun!
+
+----------------------------------------------------------------------------
+2011, <hackfin@section5.ch>

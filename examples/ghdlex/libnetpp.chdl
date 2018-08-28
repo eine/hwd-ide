@@ -1,0 +1,66 @@
+-- /* Ignore the following two lines for THIS CHDL file. */
+-- This file is generated from __FILE__
+-- Modifications will be lost, please edit __FILE__
+-- // This is a CPP template to create a VHDL file using the C preprocessor.
+-- // C style comments are stripped from the resulting file.
+-- (c) 2011 Martin Strubel <hackfin@section5.ch>
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all; -- Unsigned
+
+package ghpi_netpp is
+	constant RAMBUF_SIZE       : natural := (1024 * 512);
+
+	subtype byte_t        is unsigned(7 downto 0);
+	subtype regaddr_t     is unsigned(7 downto 0);
+	subtype token_t       is integer;
+	// These are just handles. We will change the API as soon as we
+	// know what's the best method to pass anonymous handles (pointers)
+	subtype netpphandle_t is integer;
+	subtype framebuffer_t is integer;
+	subtype pixel_t is unsigned(15 downto 0);
+	-- type pixarray_t is array(0 to RAMBUF_SIZE-1) of pixel_t;
+	type pixarray_t is array(natural range <>) of pixel_t;
+
+	type handle_t is access integer; 
+
+	constant VIDEOMODE_8BIT    : natural := 1; --! 8 Bit grayscale
+	constant VIDEOMODE_UYVY    : natural := 3; --! UYVY 16 bpp mode
+	constant VIDEOMODE_INDEXED : natural := 17; --! Indexed 16bit mode
+
+	-- Some wrapper functions:
+
+	function device_open(id: string)
+		return netpphandle_t;
+	function device_gettoken(h: netpphandle_t; id: string)
+		return token_t;
+	
+#include "func_decl.chdl"
+
+end package;
+
+package body ghpi_netpp is
+   	-- The function wrapper appends a \000 character
+	function device_open(id: string)
+		return netpphandle_t is
+		variable dev : netpphandle_t;
+    begin
+		dev := device_open_wrapped(id & NUL);
+		if dev < 0 then
+			assert false report "Failed to open netpp remote device"
+				severity failure;
+		end if;
+		return dev;
+	end device_open;
+
+	function device_gettoken(h: netpphandle_t; id: string)
+		return token_t is
+    begin
+		return device_gettoken_wrapped(h, id & NUL);
+	end device_gettoken;
+
+#include "func_body.chdl"
+
+end package body;
+

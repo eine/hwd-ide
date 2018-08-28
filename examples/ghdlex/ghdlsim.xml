@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/css" href="/home/strubi/src/netpp/xml/devdesc.css"?>
+<devdesc version="0.1"
+         xsi:schemaLocation="http://www.section5.ch/dclib/schema/devdesc /home/strubi/src/netpp/xml/devdesc.xsd"
+         xmlns="http://www.section5.ch/dclib/schema/devdesc"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xs="http://www.w3.org/2001/XMLSchema"
+         xmlns:xi="http://www.w3.org/2001/XInclude"
+         xmlns:ns3="http://www.xmlmind.com/xmleditor/schema/bugreport"
+         xmlns:ns2="http://www.w3.org/1999/xhtml"
+         xmlns:ns="http://www.section5.ch/dclib/schema/devdesc"
+         xmlns:interfaces="http://www.section5.ch/dclib/schema/interfaces"
+         xmlns:html="http://www.xmlmind.com/xmleditor/schema/xhtml"
+         xmlns:hfp="http://www.w3.org/2001/XMLSchema-hasFacetAndProperty">
+  <vendor>section5</vendor>
+
+  <!--// (c) 01/2007, Martin Strubel
+// $Id: example.xml 309 2011-05-12 12:42:54Z strubi $
+-->
+
+  <revision>
+    <major>0</major>
+
+    <minor>1</minor>
+
+    <extension>develop</extension>
+  </revision>
+
+  <header language="C">#include "example.h"</header>
+
+  <header language="VHDL">iomap_config</header>
+
+  <!--This is a header file specification. Statements in this field will be included
+in handler skeleton code and in the generated property list.
+Including a header is necessary when implementing access to global variables.-->
+
+  <returncodes>
+    <errorspec code="-1024" name="STREAM_START">
+      <info>Could not start stream (File I/O error)</info>
+    </errorspec>
+
+    <errorspec name="CAPTURE_START">
+      <info>Could not start capture</info>
+    </errorspec>
+
+    <errorspec name="CAPTURE_STOP">
+      <info>Could not stop capture</info>
+    </errorspec>
+
+    <errorspec name="VIDEO_QUEUE">
+      <info>Video buffer queue error</info>
+    </errorspec>
+
+    <errorspec name="VIDEO_TIMEOUT">
+      <info>Video frame timeout</info>
+    </errorspec>
+
+    <errorspec name="VIDEO_POLL">
+      <info>Failed when polling for frame</info>
+    </errorspec>
+
+    <errorspec name="CAPTURE_STATUS">
+      <info>Could not get capture status</info>
+    </errorspec>
+
+    <errorspec name="STREAM_WRITE">
+      <info>Could not write stream (File I/O error)</info>
+    </errorspec>
+
+    <errorspec name="VIDEODEVICE_OPEN">
+      <info>Could not open video device</info>
+    </errorspec>
+
+    <errorspec name="VIDEOBUF_ALLOC">
+      <info>Could not allocate video buffers</info>
+    </errorspec>
+
+    <errorspec name="VIDEOBUF_MMAP">
+      <info>Failed to mmap() video buffer</info>
+    </errorspec>
+
+    <errorspec name="VIDEOFORMAT">
+      <info>Could not set video format</info>
+    </errorspec>
+
+    <errorspec name="STATE">
+      <info>Bad machine state. Your code has a bug!</info>
+    </errorspec>
+
+    <errorspec name="I2C">
+      <info>Could not access i2c bus</info>
+    </errorspec>
+  </returncodes>
+
+  <device id="ghdlsim" name="GHDLSimInterface" protocol="PROPERTY">
+    <revision>
+      <major>0</major>
+
+      <minor>0</minor>
+    </revision>
+
+    <registermap addrsize="8" endian="BIG" id="fpga_registers"
+                 name="FPGA_Registermap">
+      <register addr="0x00" id="MagicId"></register>
+
+      <register addr="0x02" id="Control">
+        <info>Control register</info>
+
+        <bitfield lsb="0" msb="0" name="ENABLE">
+          <info>Enable FPGA engine</info>
+        </bitfield>
+
+        <bitfield lsb="1" msb="1" name="THROTTLE">
+          <info>If set, slow down simulation</info>
+        </bitfield>
+
+        <bitfield lsb="7" msb="7" name="RESET">
+          <info>RESET FPGA engine</info>
+        </bitfield>
+      </register>
+    </registermap>
+
+    <group name="SimulationInterface">
+      <property access="RW" name="Enable" type="BOOL">
+        <regref bits="ENABLE" ref="Control" />
+      </property>
+
+      <property access="RW" name="Reset" type="BOOL">
+        <regref bits="RESET" ref="Control" />
+      </property>
+
+      <property access="RW" name="Timeout" type="INT">
+        <variable>g_timeout</variable>
+      </property>
+
+      <property access="RW" name="Throttle" type="BOOL">
+        <regref bits="THROTTLE" ref="Control" />
+      </property>
+
+      <property access="RW" name="Fifo" type="BUFFER">
+        <!--A buffer object that is handled via a handler function. See handler.c
+(Function get_fifo()/set_fifo() for details.)-->
+
+        <handler>fifo</handler>
+      </property>
+    </group>
+  </device>
+</devdesc>
