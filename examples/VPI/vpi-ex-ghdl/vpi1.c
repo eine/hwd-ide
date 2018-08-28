@@ -35,10 +35,10 @@ vpi_proc (void)
 
 	      while ((signal_h = vpi_scan (sig_iter)) != NULL)
 		{
-		  int signal_type;
+		  //int signal_type;
 		  const char *mod_name;
 
-		  signal_type = vpi_get (vpiType, signal_h);
+		  //signal_type = vpi_get (vpiType, signal_h);
 		  mod_name = vpi_get_str (vpiName, signal_h);
 		  printf ("NET Name = %s\n", mod_name);
 		}
@@ -54,10 +54,10 @@ vpi_proc (void)
 
 	      while ((signal_h = vpi_scan (sig_iter)) != NULL)
 		{
-		  int signal_type;
+		  //int signal_type;
 		  const char *mod_name;
 
-		  signal_type = vpi_get (vpiType, signal_h);
+		  //signal_type = vpi_get (vpiType, signal_h);
 		  mod_name = vpi_get_str (vpiName, signal_h);
 		  printf ("REG Name = %s\n", mod_name);
 		}
@@ -72,7 +72,7 @@ vpi_proc (void)
 	  printf ("No Signals\n");
 	}
     }
-  
+
   /* get TOP Module Nets */
   net_iter = vpi_iterate (vpiNet, module_h);
   if (net_iter != NULL)
@@ -90,7 +90,7 @@ vpi_proc (void)
     {
       printf("No Nets\n");
     }
-  
+
   /* get TOP Module Regs */
   net_iter = vpi_iterate (vpiReg, module_h);
   if (net_iter != NULL)
@@ -105,11 +105,11 @@ vpi_proc (void)
 	  printf ("Reg Name = %s\n", mod_name);
 	}
     }
-  else 
+  else
     {
       printf ("No Regs\n");
     }
-  
+
   /* get TOP Module one to one Nets */
   h = vpi_handle (vpiNet, module_h);
   if (h != NULL)
@@ -122,7 +122,7 @@ vpi_proc (void)
     {
       printf ("No Top Level Nets\n");
     }
-  
+
   /* get TOP Module one to one Nets */
   h = vpi_handle (vpiReg, module_h);
   if (h != NULL)

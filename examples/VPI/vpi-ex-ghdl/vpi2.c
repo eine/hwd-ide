@@ -25,7 +25,7 @@ void printContent (vpiHandle parent)
       vpiHandle netHandle;
       while ((netHandle = vpi_scan (Iterator)))
 	{
-	  char *NetName = vpi_get_str (vpiName, netHandle);
+	  //char *NetName = vpi_get_str (vpiName, netHandle);
 	  vpi_printf (" net %s\n", vpi_get_str (vpiName, netHandle));
 	}
     }
@@ -43,7 +43,7 @@ void printModules()
 {
   vpiHandle topModIterator;
   vpiHandle topModHandle;
-  
+
   char *ModName;
 
   vpi_printf ("got to here \n");
