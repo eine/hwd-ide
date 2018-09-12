@@ -1,6 +1,6 @@
 # [ygdes.com/GHDL](http://ygdes.com/GHDL)
 
-Created by [Yann Guidon](ygdes.com) and converted to markdown by [@1138-4EB](https://github.com/1138-4EB).
+Created by [Yann Guidon](http://ygdes.com) and converted to markdown by [@1138-4EB](https://github.com/1138-4EB).
 The files in this subdirectory are released in the hope that they are helpful or entertaining, no warranty yada yada...
 You use a high level language so you're a grown up now.
 
