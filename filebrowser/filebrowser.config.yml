@@ -3,17 +3,16 @@ allowCommands: true
 allowEdit: true
 allowNew: true
 commands:
-  - ls
-  - mv
-  - cp
-  - ghdl
-  - vunit
-  - python3
+  - ls$
+  - mv$
+  - cp$
+  - ghdl$
+  - python.*
 database: /opt/filebrowser/filebrowser.db
 log: stdout
 noAuth: true
 plugin: ""
-port: 80
+port: 8080
 reCaptchaKey: ""
 reCaptchaSecret: ""
 scope: /srv

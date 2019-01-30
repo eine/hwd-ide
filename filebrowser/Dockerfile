@@ -12,7 +12,7 @@ RUN mkdir /opt/filebrowser && cd /opt/filebrowser \
 COPY filebrowser.config.yml /opt/filebrowser/.config.yml
 VOLUME /tmp
 VOLUME /srv
-EXPOSE 80/tcp
+EXPOSE 8080/tcp
 ENTRYPOINT ["/opt/filebrowser/filebrowser", "--config", "/opt/filebrowser/.config.yml"]
 
 #---
@@ -22,5 +22,5 @@ FROM ghdl/ext:vunit-gtkwave AS ide-gtkwave
 COPY --from=ide /opt/filebrowser /opt/
 VOLUME /tmp
 VOLUME /srv
-EXPOSE 80/tcp
+EXPOSE 8080/tcp
 ENTRYPOINT ["/opt/filebrowser/filebrowser", "--config", "/opt/filebrowser/.config.yml"]
