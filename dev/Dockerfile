@@ -1,5 +1,5 @@
 FROM ghdl/ext:broadway
 
-COPY bashrc.sh /etc/hwd-ide/bashrc.sh
+COPY bashrc.sh /usr/local/etc/hwd-ide.sh
 
-RUN printf "\nsource /etc/hwd-ide/bashrc.sh\n" >> /etc/bash.bashrc
+RUN printf "\nsource /usr/local/etc/hwd-ide.sh\n" >> /etc/bash.bashrc
