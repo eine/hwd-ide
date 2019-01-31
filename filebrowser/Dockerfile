@@ -15,7 +15,15 @@ CMD ["filebrowser"]
 
 #---
 
-FROM ghdl/ext:broadway AS ide-gtk
+FROM ghdl/ext:broadway as gtk
+
+COPY bashrc.sh /usr/local/etc/hwd-ide.sh
+
+RUN printf "\nsource /usr/local/etc/hwd-ide.sh\n" >> /etc/bash.bashrc
+
+#---
+
+FROM gtk AS gtk-ide
 
 COPY --from=ide /usr/local/bin/filebrowser /usr/local/bin/filebrowser
 COPY --from=ide /etc/filebrowser/.filebrowser.yml /etc/filebrowser
