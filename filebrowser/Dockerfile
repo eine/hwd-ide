@@ -26,7 +26,7 @@ RUN printf "\nsource /usr/local/etc/hwd-ide.sh\n" >> /etc/bash.bashrc
 FROM gtk AS gtk-ide
 
 COPY --from=ide /usr/local/bin/filebrowser /usr/local/bin/filebrowser
-COPY --from=ide /etc/filebrowser/.filebrowser.yml /etc/filebrowser
+COPY --from=ide /etc/filebrowser/.filebrowser.yml /etc/filebrowser/
 
 RUN mkdir -p /var/lib/filebrowser/ \
  && filebrowser config init \

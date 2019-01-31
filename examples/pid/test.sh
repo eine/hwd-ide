@@ -26,9 +26,9 @@ printf "[TEST] ghdl -r --disp-tree\n"
 ghdl -r --std=08 tb --disp-tree > disp-tree.txt
 
 printf "[TEST] ghdl --pp-html\n"
-ghdl --pp-html "$scriptdir"/hdl/**/*.vhd > pid.html
+ghdl --pp-html --std=08 "$scriptdir"/hdl/**/*.vhd > pid.html
 
 printf "[TEST] ghdl --file-to-xml\n"
-ghdl --std=08 --file-to-xml "$scriptdir"/hdl/**/*.vhd > pid.xml
+ghdl --file-to-xml --std=08 "$scriptdir"/hdl/**/*.vhd > pid.xml
 
 #gtkwave pid.vcd

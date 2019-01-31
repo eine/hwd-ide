@@ -24,7 +24,7 @@ enable_color
 
 #---
 
-[ -nz "$TRAVIS" ] && {
+[ -n "$TRAVIS" ] && {
   # This is a trimmed down copy of
   # https://github.com/travis-ci/travis-build/blob/master/lib/travis/build/templates/header.sh
   travis_time_start() {
@@ -99,7 +99,7 @@ images () {
 deploy () {
   getDockerCredentialPass
   dockerLogin
-  for tag in `echo $(docker images ghdl/ext:ide* | awk -F ' ' '{print $1 ":" $2}') | cut -d ' ' -f2-`; do
+  for tag in `echo $(docker images ghdl/ext:* | awk -F ' ' '{print $1 ":" $2}') | cut -d ' ' -f2-`; do
     if [ "$tag" = "REPOSITORY:TAG" ]; then break; fi
     printf "[DOCKER push] ${tag}\n"
     docker push $tag
