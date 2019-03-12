@@ -90,8 +90,12 @@ EOF
 images () {
   cd filebrowser
   for tag in `sed -e 's/FROM.*AS //;tx;d;:x' Dockerfile`; do
-    printf "[DOCKER build] ${tag}\n"
+    echo "travis_fold:start:build-$tag"
+    travis_time_start
+    printf "$ANSI_BLUE[DOCKER build] ${tag}$ANSI_NOCOLOR\n"
     docker build -t "ghdl/ext:$tag" --target "$tag" .
+    travis_time_finish
+    echo "travis_fold:end:build-$tag"
   done
   cd ..
 }
@@ -101,8 +105,12 @@ deploy () {
   dockerLogin
   for tag in `echo $(docker images ghdl/ext:* | awk -F ' ' '{print $1 ":" $2}') | cut -d ' ' -f2-`; do
     if [ "$tag" = "REPOSITORY:TAG" ]; then break; fi
-    printf "[DOCKER push] ${tag}\n"
+    echo "travis_fold:start:push-$tag"
+    travis_time_start
+    printf "$ANSI_BLUE[DOCKER push] ${tag}$ANSI_NOCOLOR\n"
     docker push $tag
+    travis_time_finish
+    echo "travis_fold:end:push-$tag"
   done
   docker logout
 }
