@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 scriptdir="$(cd `dirname $0`; pwd)"
 
 ghdl -a "$scriptdir"/hdl/*.vhd
